@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Visita Rápida</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="quick-visit-content">
+  <div class="modal-container">
+    <div class="header-section">
+      <ion-icon name="flash" class="quick-icon"></ion-icon>
+      <h2>Crear Visita Rápida</h2>
+      <p>Selecciona un visitante para crear una reservación inmediata</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-section">
+        <ion-item lines="full" class="visitor-select">
+          <ion-label position="stacked">Visitante *</ion-label>
+          <ion-select
+            formControlName="visitor_id"
+            placeholder="Selecciona un visitante"
+          >
+            @for (visitor of visitors(); track visitor.id) {
+            <ion-select-option [value]="visitor.id">
+              {{ visitor.fullname }}
+            </ion-select-option>
+            } @empty {
+            <ion-select-option disabled>
+              No tienes visitantes, crea uno con el botón de +
+            </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+
+        <div class="add-visitor-section">
+          <ion-button
+            fill="outline"
+            color="primary"
+            (click)="addVisitor()"
+            class="add-visitor-btn"
+          >
+            <ion-icon name="person-add" slot="start"></ion-icon>
+            Agregar Nuevo Visitante
+          </ion-button>
+        </div>
+
+        <div class="default-info">
+          <h3>Configuración por defecto:</h3>
+          <ion-item lines="none">
+            <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h4>Fecha de visita</h4>
+              <p>{{ form.get("visit_date")?.value | date : "dd/MM/yyyy" }}</p>
+            </ion-label>
+          </ion-item>
+
+          <!-- <ion-item lines="none">
+            <ion-icon name="time" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h4>Tipo de visita</h4>
+              <p>Sin pernocta (mismo día)</p>
+            </ion-label>
+          </ion-item> -->
+
+          <ion-item lines="none">
+            <ion-icon
+              name="chatbubble-ellipses"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label>
+              <h4>Observaciones</h4>
+              <p>{{ form.get("remarks")?.value }}</p>
+            </ion-label>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="buttons-section">
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="!form.get('visitor_id')?.value"
+          class="create-btn"
+        >
+          <ion-icon name="flash" slot="start"></ion-icon>
+          Crear Visita Rápida
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          fill="clear"
+          color="medium"
+          (click)="dismiss()"
+        >
+          Cancelar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

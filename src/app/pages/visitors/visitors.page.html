@@ -1,0 +1,76 @@
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="flex flex-col items-center justify-between gap-4 mt-4 mb-3">
+    <figure class="logo">
+      <img src="assets/logos/logo.png" alt="logo" />
+    </figure>
+    <h2 class="text-xl font-extrabold mb-1">Visitantes</h2>
+  </div>
+
+  <div lines="none" class="flex items-center gap-1">
+    <ion-searchbar
+      placeholder="Busca un visitante"
+      [(ngModel)]="search"
+      (ionInput)="onSearch()"
+      class="flex-1"
+    ></ion-searchbar>
+    <ion-button
+      shape="round"
+      (click)="createVisitor()"
+      mode="ios"
+      fill="solid"
+      color="primary"
+    >
+      <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-list
+    class="flex flex-col w-full gap-4 items-center justify-center bg-transparent"
+    lines="none"
+  >
+    @if((isLoading$ | async) || (isSearching$ | async)) { @for(item of
+    skeletonItems; track item.id) {
+
+    <ion-item
+      class="skelleton-item flex items-center w-full h-14 rounded-lg ion-activatable ion-no-padding bg-transparent"
+    >
+      <ion-thumbnail class="" slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 60%"
+          ></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    } } @else { @for(visitor of visitorsTemp(); track visitor.id){
+    <app-card [visitor]="visitor" />
+
+    } @if(visitorsTemp().length === 0 && !(isSearchMode$ | async)) {
+    <h3 class="font-bold text-xl text-center">Aún no tienen visitantes</h3>
+    <fa-icon [icon]="faUsers" class="text-2xl text-primary"></fa-icon>
+
+    <ion-button shape="round" (click)="createVisitor()" mode="ios">
+      Nuevo visitante
+    </ion-button>
+    } @if(visitorsTemp().length === 0 && (isSearchMode$ | async)) {
+    <h3 class="font-bold text-xl text-center">No se encontraron visitantes</h3>
+    <fa-icon [icon]="faUsers" class="text-2xl text-primary"></fa-icon>
+    } }
+    <ion-infinite-scroll (ionInfinite)="onScroll($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

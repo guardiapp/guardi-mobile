@@ -1,0 +1,16 @@
+@if(control.errors?.['required'] && (control.touched && control.dirty)) {
+<div>
+  <p class="text-red-600">Este campo es requerido</p>
+</div>
+} @if(control.errors?.['email'] && (control.touched && control.dirty)) {
+<div>
+  <p class="text-red-600">Este campo debe ser un correo válido</p>
+</div>
+} @if(control.errors?.['minlength'] && (control.touched && control.dirty)) {
+<div>
+  <p class="text-red-600">
+    Este campo debe tener al menos
+    {{ control.errors?.['minlength'].requiredLength }} caracteres
+  </p>
+</div>
+}

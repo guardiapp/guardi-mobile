@@ -1,0 +1,305 @@
+// Confirm Modal Component Styles
+.confirm-modal-content {
+  --background: #f8f9fa;
+  padding: 16px;
+}
+
+// Section containers
+.visitor-info-section,
+.reservation-details-section,
+.apartment-info-section,
+.service-info-section {
+  margin-bottom: 16px;
+}
+
+// Card styling
+.visitor-card,
+.details-card,
+.apartment-card,
+.service-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0;
+
+  ion-card-header {
+    padding: 16px 16px 8px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px 12px 0 0;
+
+    .card-title {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .title-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 16px;
+  }
+}
+
+// Visitor card specific styling
+.visitor-card {
+  ion-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .visitor-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .visitor-avatar {
+      width: 60px;
+      height: 60px;
+      border: 3px solid #667eea;
+    }
+
+    .visitor-details {
+      flex: 1;
+
+      .visitor-name {
+        margin: 0 0 4px 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      .visitor-document {
+        margin: 0;
+        font-size: 14px;
+        color: #7f8c8d;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Details card specific styling
+.details-card {
+  ion-card-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+}
+
+// Apartment card specific styling
+.apartment-card {
+  ion-card-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+}
+
+// Service card specific styling
+.service-card {
+  ion-card-header {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  }
+}
+
+// List styling
+.details-list {
+  background: transparent;
+  padding: 0;
+
+  .detail-item {
+    --background: transparent;
+    --border-color: #e9ecef;
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-icon {
+      font-size: 20px;
+      color: #667eea;
+      margin-right: 12px;
+
+      &.warning-icon {
+        color: #e74c3c;
+      }
+    }
+
+    ion-label {
+      h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 4px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #34495e;
+        margin: 0;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// Action buttons section
+.action-buttons-section {
+  margin-top: 24px;
+  padding: 0 16px;
+
+  ion-button {
+    margin-bottom: 12px;
+    height: 48px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &.confirm-button {
+      --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --background-hover: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+      --color: white;
+      --border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+
+    &.cancel-button {
+      --background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      --background-hover: linear-gradient(135deg, #ff5252 0%, #e53e3e 100%);
+      --color: white;
+      --border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .confirm-modal-content {
+    padding: 12px;
+  }
+
+  .visitor-card,
+  .details-card,
+  .apartment-card,
+  .service-card {
+    ion-card-header {
+      padding: 12px 12px 6px 12px;
+
+      .card-title {
+        font-size: 16px;
+
+        .title-icon {
+          font-size: 18px;
+        }
+      }
+    }
+
+    ion-card-content {
+      padding: 12px;
+    }
+  }
+
+  .visitor-card {
+    .visitor-avatar-section {
+      .visitor-avatar {
+        width: 50px;
+        height: 50px;
+      }
+
+      .visitor-details {
+        .visitor-name {
+          font-size: 18px;
+        }
+
+        .visitor-document {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .details-list {
+    .detail-item {
+      ion-label {
+        h3 {
+          font-size: 13px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .action-buttons-section {
+    padding: 0 12px;
+
+    ion-button {
+      height: 44px;
+      font-size: 15px;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .confirm-modal-content {
+    --background: #1a1a1a;
+  }
+
+  .visitor-card,
+  .details-card,
+  .apartment-card,
+  .service-card {
+    --background: #2d2d2d;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .details-list {
+    .detail-item {
+      --border-color: #404040;
+
+      ion-label {
+        h3 {
+          color: #e0e0e0;
+        }
+
+        p {
+          color: #b0b0b0;
+        }
+      }
+    }
+  }
+
+  .visitor-card {
+    .visitor-details {
+      .visitor-name {
+        color: #e0e0e0;
+      }
+
+      .visitor-document {
+        color: #b0b0b0;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@if (control) {
+<div class="input-container">
+  @if(label) {
+  <ion-label>{{ label }}</ion-label>
+  }
+  <div
+    class="input-wrapper"
+    [ngClass]="{ inputFocus: isFocused, isInvalid: control.errors }"
+  >
+    <ion-input
+      [formControl]="control"
+      mode="ios"
+      [type]="type"
+      [placeholder]="placeholder"
+      (ionFocus)="onFocus()"
+      (ionBlur)="onBlur()"
+      class="custom-input"
+      [clearInput]="clearInput"
+    ></ion-input>
+    @if (type === 'email') {
+    <ion-icon name="mail-outline"></ion-icon>
+    } @if (toggleVisibility) {
+    <fa-icon
+      class="ml-1"
+      [icon]="type === 'password' ? faEye : faEyeSlash"
+      (click)="togglePasswordVisibility()"
+    ></fa-icon>
+    }
+  </div>
+</div>
+
+<app-validation-errors
+  [control]="control"
+  [errors]="control.errors"
+></app-validation-errors>
+
+}

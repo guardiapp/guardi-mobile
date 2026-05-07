@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccionar Residente</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar
+    [formControl]="searchForm.controls.search"
+    placeholder="Buscar por nombre"
+    clear-input="true"
+  ></ion-searchbar>
+
+  @if(isLoading()) {
+  <div
+    class="ion-padding"
+    style="display: flex; justify-content: center; padding-top: 24px"
+  >
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  } @else {
+
+  <!-- Lista de residentes -->
+  <ion-list class="bg-transparent">
+    @for(apartment of filteredResidents(); track apartment.id) {
+    <ion-item button (click)="selectResident(apartment)">
+      <ion-avatar slot="start">
+        <ion-icon name="person"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>
+          {{ apartment.resident.profile.first_name }}
+          {{ apartment.resident.profile.last_name }}
+        </h2>
+        <p>Apartamento: {{ apartment.identifier }}</p>
+        <p>{{ apartment.resident.email }}</p>
+      </ion-label>
+      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
+    </ion-item>
+    } @empty {
+    <ion-item>
+      <ion-label class="ion-text-center">
+        <p>No se encontraron residentes</p>
+      </ion-label>
+    </ion-item>
+    }
+    <ion-infinite-scroll (ionInfinite)="onScroll($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+  }
+
+  <!-- </div> -->
+</ion-content>

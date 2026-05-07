@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccionar visitante</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar [formControl]="searchForm.controls.search"></ion-searchbar>
+
+  @if(isLoading()) {
+  <div
+    class="ion-padding"
+    style="display: flex; justify-content: center; padding-top: 24px"
+  >
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  } @else {
+
+  <ion-list class="bg-transparent">
+    @for(visitor of visitors(); track visitor.id) {
+
+    <ion-item button (click)="select(visitor)">
+      <ion-avatar slot="start">
+        <ion-icon name="person"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>
+          {{ visitor.first_name }}
+          {{ visitor?.last_name }}
+        </h2>
+        <p>{{ visitor.document }}</p>
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+  }
+</ion-content>

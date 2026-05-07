@@ -1,0 +1,126 @@
+<ion-content #content [fullscreen]="true">
+  <ion-header mode="md" class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="flex flex-col items-center justify-between gap-4 px-4 mt-5">
+    <figure class="logo">
+      <img src="assets/logos/logo.png" alt="logo" />
+    </figure>
+    <div class="text-center">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <fa-icon [icon]="faCog" class="text-tertiary text-lg"></fa-icon>
+        <h4 class="text-lg font-semibold">Crear QR para servicio</h4>
+      </div>
+      <p class="text-sm text-gray-600">
+        Selecciona un servicio y agrega detalles de tu pedido
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list
+      lines="none"
+      class="ion-no-padding flex flex-col items-center w-full py-6 md:w-1/3 lg:w-1/4 md:mx-auto bg-transparent"
+    >
+      <div class="px-6 flex flex-col mt-4 gap-6 w-full">
+        <!-- Selector de Servicio -->
+        <div class="form-section">
+          <h5 class="section-title">
+            <fa-icon [icon]="faCog" class="mr-2"></fa-icon>
+            Seleccionar Servicio
+          </h5>
+          <ion-item class="custom-select" button (click)="openServiceModal()">
+            <ion-label>
+              <span class="label-text">Servicio *</span>
+              <p class="selected-service-text">{{ selectedServiceText() }}</p>
+            </ion-label>
+            <ion-icon name="chevron-down" slot="end"></ion-icon>
+          </ion-item>
+        </div>
+
+        <!-- Detalles del Pedido -->
+        <div class="form-section">
+          <h5 class="section-title">
+            <ion-icon
+              name="chatbubble-ellipses-outline"
+              class="mr-2"
+            ></ion-icon>
+            Detalles del Pedido
+          </h5>
+
+          <ion-item lines="none" class="remarks-item">
+            <ion-textarea
+              formControlName="remarks"
+              placeholder="Ej: Pizza Napolitana extra pepperoni, Coca Cola 1.5L"
+              rows="4"
+              maxlength="500"
+            ></ion-textarea>
+          </ion-item>
+
+          <div class="remarks-helper">
+            <ion-text color="medium">
+              <small>Sé específico con tu pedido para un mejor servicio</small>
+            </ion-text>
+          </div>
+        </div>
+
+        <!-- Información Automática -->
+        <div class="form-section info-section">
+          <h5 class="section-title">
+            <ion-icon name="information-circle-outline" class="mr-2"></ion-icon>
+            Información de Entrega
+          </h5>
+
+          <div class="default-info">
+            <ion-item lines="none">
+              <ion-icon
+                name="calendar"
+                slot="start"
+                color="secondary"
+              ></ion-icon>
+              <ion-label>
+                <h4>Fecha de entrega</h4>
+                <p>{{ form.get("visit_date")?.value | date : "dd/MM/yyyy" }}</p>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-icon name="time" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <h4>Hora estimada</h4>
+                <p>{{ form.get("entry_time")?.value }}</p>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-icon name="home" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <h4>Lugar de entrega</h4>
+                <p>Tu apartamento registrado</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <ion-button
+        type="submit"
+        mode="ios"
+        class="text-white mt-6 mx-6"
+        expand="block"
+        [disabled]="!form.valid"
+      >
+        <fa-icon [icon]="faCalendarCheck" class="mr-2"></fa-icon>
+        Solicitar Servicio
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

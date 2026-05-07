@@ -1,0 +1,37 @@
+ion-searchbar {
+  padding: 8px 12px;
+}
+
+ion-avatar {
+  --border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ion-color-primary);
+  color: white;
+}
+
+ion-avatar ion-icon {
+  font-size: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+ion-item h2 {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+ion-item p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}

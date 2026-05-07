@@ -1,0 +1,263 @@
+@let resident = selectedApartment()?.resident; @let apartment =
+selectedApartment();
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        Cancelar
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="flex flex-col items-center justify-between gap-4 px-4 mt-5">
+    <h2 class="text-xl font-extrabold mb-1">Nueva Visita</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list
+      lines="none"
+      class="ion-no-padding bg-transparent flex flex-col items-center w-full py-6 md:mx-auto"
+    >
+      <div class="px-6 flex flex-col mt-2 gap-4 w-full">
+        <!-- Selección de Residente -->
+        <div class="flex justify-between items-center gap-1">
+          <ion-item
+            class="custom-select w-[85%]"
+            button
+            detail
+            (click)="openSelectResidentModal()"
+          >
+            <ion-label position="fixed">Residente</ion-label>
+            <ion-input
+              [value]="
+                resident
+                  ? resident?.profile?.first_name +
+                    ' ' +
+                    resident?.profile?.last_name +
+                    ' - Apt. ' +
+                    apartment?.identifier
+                  : ''
+              "
+              placeholder="Selecciona un residente"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-button
+            (click)="openSelectResidentModal()"
+            class="w-[15%] h-[48px]"
+            color="primary"
+            shape="round"
+          >
+            <ion-icon
+              slot="icon-only"
+              class="text-2xl"
+              name="people-outline"
+            ></ion-icon>
+          </ion-button>
+        </div>
+
+        <!-- Selección de Visitante (mediante modal propio) -->
+        @if(selectedApartment()?.resident?.id) {
+        <div class="flex justify-between items-center gap-1">
+          <ion-item
+            class="custom-select w-[85%]"
+            button
+            detail
+            (click)="openSelectVisitorModal()"
+          >
+            <ion-label position="fixed">Visitante</ion-label>
+            <ion-input
+              [value]="
+                selectedVisitor()
+                  ? selectedVisitor()?.first_name +
+                    ' ' +
+                    selectedVisitor()?.last_name +
+                    (selectedVisitor()?.document
+                      ? ' - ' + selectedVisitor()?.document
+                      : '')
+                  : ''
+              "
+              placeholder="Seleccionar visitante"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-button
+            (click)="openSelectVisitorModal()"
+            class="w-[15%] h-[48px]"
+            color="primary"
+            mode="ios"
+            shape="round"
+          >
+            <ion-icon
+              slot="icon-only"
+              class="text-2xl"
+              name="person-outline"
+            ></ion-icon>
+          </ion-button>
+        </div>
+        }
+
+        <!-- Acompañantes -->
+        <div class="flex justify-between items-center">
+          <span>¿Tiene acompañantes?</span>
+          <ion-toggle formControlName="has_companions" slot="end"></ion-toggle>
+        </div>
+
+        @if(form.get('has_companions')?.value) {
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="openAddCompanionModal()"
+          class="my-2"
+        >
+          <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          Agregar Acompañante
+        </ion-button>
+        }
+
+        <div
+          *ngIf="form.get('has_companions')?.value && companions().length > 0"
+          class="companions-list my-2"
+        >
+          <ion-list-header>
+            <ion-label>Acompañantes Agregados</ion-label>
+          </ion-list-header>
+          @for(companion of companions(); track companion.id; let i = $index) {
+          <ion-item>
+            <ion-label>
+              <p>{{ companion.name | titlecase }}</p>
+              <p class="text-xs text-gray-500">
+                {{ companion.identification }}
+              </p>
+            </ion-label>
+            <ion-buttons slot="end">
+              <ion-button
+                fill="clear"
+                color="primary"
+                (click)="openAddCompanionModal(companion, i)"
+              >
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button
+                fill="clear"
+                color="danger"
+                (click)="removeCompanion(i)"
+              >
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+          }
+        </div>
+
+        <!-- Vehículo -->
+        <div class="flex justify-between items-center">
+          <span>¿Tiene vehículo?</span>
+          <ion-toggle formControlName="has_vehicle" slot="end"></ion-toggle>
+        </div>
+
+        <app-input
+          *ngIf="form.get('has_vehicle')?.value"
+          formControlName="car_plate"
+          label="Placa del vehículo"
+          placeholder="Escribe la placa del vehículo"
+        />
+
+        <!-- Fecha de visita -->
+        <p>Fecha</p>
+        <ion-datetime-button
+          class="mr-auto"
+          datetime="datetime4"
+        ></ion-datetime-button>
+
+        <!-- Tipo de acceso -->
+        <div class="mb-6">
+          <p class="mb-4 text-base font-medium text-gray-800">
+            ¿Qué tipo de acceso necesita esta visita?
+          </p>
+          <ion-radio-group formControlName="with_stay">
+            <div class="flex flex-col gap-3">
+              <ion-radio
+                [value]="false"
+                class="access-card"
+                [class.selected]="!form.get('with_stay')?.value"
+              >
+                <div class="access-card-content">
+                  <ion-icon name="key-outline" class="access-icon"></ion-icon>
+                  <div class="access-content">
+                    <h3 class="access-title">Acceso Único</h3>
+                    <p class="access-description">Solo para una entrada</p>
+                  </div>
+                </div>
+              </ion-radio>
+
+              <ion-radio
+                [value]="true"
+                class="access-card"
+                [class.selected]="form.get('with_stay')?.value"
+              >
+                <div class="access-card-content">
+                  <ion-icon
+                    name="repeat-outline"
+                    class="access-icon"
+                  ></ion-icon>
+                  <div class="access-content">
+                    <h3 class="access-title">Acceso Recurrente</h3>
+                    <p class="access-description">Para varias entradas</p>
+                  </div>
+                </div>
+              </ion-radio>
+            </div>
+          </ion-radio-group>
+        </div>
+
+        @if(form.get('with_stay')?.value) {
+        <p>Fecha de expiración</p>
+        <ion-datetime-button
+          class="mr-auto"
+          datetime="datetime5"
+        ></ion-datetime-button>
+        }
+
+        <!-- Datetime modals -->
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              formControlName="visit_date"
+              id="datetime4"
+              presentation="date"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              formControlName="expiration_date"
+              id="datetime5"
+              presentation="date"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <!-- Comentarios -->
+        <app-input
+          formControlName="remarks"
+          label="Comentarios"
+          placeholder="Escribe un comentario"
+        />
+      </div>
+
+      <ion-button
+        type="submit"
+        mode="ios"
+        class="text-white mt-4"
+        expand="block"
+      >
+        Crear visita
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

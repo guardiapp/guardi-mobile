@@ -1,0 +1,102 @@
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="flex flex-col items-center justify-between gap-4 mt-4">
+    <figure class="logo">
+      <img src="assets/logos/logo.png" alt="logo" />
+    </figure>
+    <h2 class="text-xl font-extrabold mb-1">Mis Visitas</h2>
+  </div>
+  <div lines="none">
+    <ion-searchbar
+      placeholder="Busca una visita"
+      [value]="search()"
+      (ionInput)="orderSearch($event)"
+    ></ion-searchbar>
+
+    <!-- Filtros combinados -->
+    <div class="px-4 py-2">
+      <ion-segment
+        mode="md"
+        :scrollable="true"
+        [value]="getCurrentFilter()"
+        (ionChange)="onCombinedSegmentChange($event)"
+        color="primary"
+      >
+        <ion-segment-button value="all">
+          <ion-label>Todas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="unique">
+          <ion-icon name="key-outline"></ion-icon>
+          <ion-label>Únicas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="recurring">
+          <ion-icon name="repeat-outline"></ion-icon>
+          <ion-label>Recurrentes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="PENDING">
+          <ion-icon name="time-outline"></ion-icon>
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="VISITED">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <ion-label>Visitadas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
+
+  <ion-list
+    class="flex flex-col w-full gap-4 items-center justify-center bg-transparent"
+    lines="none"
+  >
+    @if(((isLoading$ | async) || (isSearching$ | async)) && (isloadingMore$ |
+    async) === false ) { @for(item of skeletonItems; track item.id) {
+    <ion-item
+      class="skelleton-item flex items-center w-full h-14 rounded-lg ion-activatable ion-no-padding bg-transparent"
+    >
+      <ion-thumbnail class="" slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 80%"
+          ></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 60%"
+          ></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 60%"
+          ></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    } } @else { @if(reservationsTemp().length === 0) {
+    <div class="flex flex-col items-center justify-center w-full p-4">
+      <ion-text color="medium" class="text-center">
+        @if((isSearchMode$ | async) && search().trim()) {
+        <h4>Visita no encontrada</h4>
+        <p>No se encontraron visitas que coincidan con "{{ search() }}"</p>
+        } @else {
+        <h4>No tienes visitas disponibles</h4>
+        <p>Cuando realices una visita aparecerá aquí</p>
+        }
+      </ion-text>
+    </div>
+    } @else { @for(reservation of reservationsTemp(); track reservation.id){
+    <app-card [reservation]="reservation" />
+    } } }
+    <ion-infinite-scroll (ionInfinite)="onScroll($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

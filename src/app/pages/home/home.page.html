@@ -1,0 +1,43 @@
+<ion-content class="home-content" [fullscreen]="true">
+  <div class="ion-no-border header-container">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="/assets/logos/logo.png" alt="Logo" class="logo" />
+        <h1 class="app-title">Guardi</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <!-- Grid de opciones principales -->
+    <div class="options-grid">
+      @for (option of menuOptions; track option.title) {
+      <div
+        class="option-card"
+        [class]="option.gradient"
+        (click)="onOptionClick(option)"
+        pRipple
+      >
+        <div class="option-icon">
+          <fa-icon [icon]="option.icon"></fa-icon>
+        </div>
+        <div class="option-text">
+          <h3>{{ option.title }}</h3>
+          <p>{{ option.subtitle }}</p>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <ion-fab slot="fixed" horizontal="start" vertical="bottom" color="danger">
+    <ion-fab-button color="danger" (click)="confirmPanicAlert()">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom" color="danger">
+    <ion-fab-button color="success" (click)="callGuard()">
+      <ion-icon name="call-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

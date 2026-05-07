@@ -1,0 +1,166 @@
+.logo {
+  margin: 0;
+  img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+.service-selection-content {
+  --background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.service-item {
+  --background: rgba(255, 255, 255, 0.9);
+  --border-radius: 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    --background: rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-color-indicator {
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 12px 0 0 12px;
+    transition: width 0.3s ease;
+  }
+
+  &:hover .service-color-indicator {
+    width: 6px;
+  }
+
+  ion-label {
+    margin-left: 8px;
+    
+    h3 {
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+
+  ion-icon[name="checkmark"] {
+    font-size: 1.5rem;
+  }
+}
+
+.empty-state {
+  --background: transparent;
+  border: none;
+  margin: 2rem 0;
+
+  ion-icon {
+    display: block;
+    margin: 0 auto 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+// Spinner styles
+ion-spinner {
+  --color: var(--ion-color-primary);
+}
+
+// Infinite scroll content
+ion-infinite-scroll-content {
+  .infinite-loading {
+    color: var(--ion-color-primary);
+  }
+}
+
+// Header customization
+// ion-header {
+//   ion-toolbar {
+//     ion-title {
+//       font-weight: 600;
+//     }
+
+//     ion-button {
+//       ion-icon {
+//         font-size: 1.5rem;
+//       }
+//     }
+//   }
+// }
+
+// // Content padding
+// ion-content {
+//   --padding-top: 0;
+//   --padding-bottom: 20px;
+// }
+
+// List styles
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+// Loading states
+.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  ion-spinner {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+}
+
+// Animation for items
+.service-item {
+  animation: slideInUp 0.3s ease-out;
+  --padding-top: .5rem;
+  --padding-bottom: .5rem;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (min-width: 768px) {
+  .service-item {
+    margin: 12px 16px;
+  }
+  
+  .px-4 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

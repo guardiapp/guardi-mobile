@@ -1,0 +1,8 @@
+{
+  "name": "guardi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "ee8ca991"
+}

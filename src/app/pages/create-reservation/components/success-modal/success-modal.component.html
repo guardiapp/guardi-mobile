@@ -1,0 +1,32 @@
+<ion-content class="" [fullscreen]="true">
+  <div class="h-full w-full flex items-center justify-around flex-col p-6">
+    <figure class="logo mt-16">
+      <img src="assets/logos/logo.png" alt="logo" />
+    </figure>
+    <div class="flex items-center justify-center flex-col my-auto gap-4">
+      <h3 class="text-xl font-extrabold text-center w-[210px]">
+        Tu visita fue creada con éxito.
+      </h3>
+      <qrcode
+        (qrCodeURL)="onChangeURL($event)"
+        [qrdata]="qrData"
+        [width]="300"
+        [errorCorrectionLevel]="'M'"
+        elementType="img"
+        colorDark="#00185b"
+      ></qrcode>
+
+      <a [href]="qrCodeDownloadLink" download="qrcode"> Copiar QR </a>
+      <ion-button (click)="shareQr()" mode="ios" class="text-white">
+        Compartir QR
+      </ion-button>
+      <ion-button fill="outline" (click)="close()" mode="ios">
+        Cerrar
+      </ion-button>
+    </div>
+    <p class="mt-auto text-center text-xs font-light">
+      Puedes editar o eliminar tus visita siempre y cuando las políticas de
+      condominio lo permita.
+    </p>
+  </div>
+</ion-content>

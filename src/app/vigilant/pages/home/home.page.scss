@@ -1,0 +1,176 @@
+// Variables de colores basadas en el tema
+:host {
+  --primary-color: var(--ion-color-primary);
+  --secondary-color: var(--ion-color-secondary);
+  --tertiary-color: var(--ion-color-tertiary);
+  --success-color: var(--ion-color-success);
+  --warning-color: var(--ion-color-warning);
+  --danger-color: var(--ion-color-danger);
+  --light-color: var(--ion-color-light);
+  --medium-color: var(--ion-color-medium);
+}
+
+.header-container {
+  height: 130px;
+  position: relative;
+  z-index: 1;
+
+  // Header
+  .header-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 10px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .app-title {
+    color: var(--ion-color-secondary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Contenido principal
+.vigilant-content {
+  --background: transparent;
+}
+
+.container {
+  padding: 2rem 1.5rem;
+  max-width: 100%;
+  width: 100%;
+  min-height: calc(100vh - 130px); // Altura fija basada en el viewport menos el header
+  position: absolute;
+  top: 130px; // Posicionado justo debajo del header
+  z-index: 999;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background: linear-gradient(180deg, #ffffff 0%, #ddeaf5 100%);
+
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; // Scroll interno
+  overflow-x: hidden;
+  scroll-behavior: smooth; // Scroll suave
+}
+
+// Grid de opciones
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  min-height: fit-content; // Asegura que el contenido se ajuste
+}
+
+.option-card {
+  aspect-ratio: 1;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.option-icon {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.option-text {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.25rem 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    opacity: 0.9;
+  }
+}
+
+// Gradientes personalizados para vigilante
+.scan-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.create-gradient {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option-card {
+  animation: fadeInUp 0.6s ease-out;
+
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+}
+
+// Responsive
+@media (max-width: 375px) {
+  .container {
+    padding: 1.5rem 1rem;
+    height: calc(100vh - 105px); // Ajuste para pantallas más pequeñas
+    top: 105px;
+  }
+
+  .header-container {
+    height: 105px;
+  }
+
+  .options-grid {
+    gap: 1rem;
+  }
+
+  .option-icon {
+    font-size: 1.5rem;
+  }
+}

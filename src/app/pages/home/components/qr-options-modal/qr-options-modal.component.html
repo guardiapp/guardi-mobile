@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true">
+  <ion-header mode="md" class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button
+          (click)="dismiss()"
+          expand="block"
+          fill="clear"
+          shape="round"
+        >
+          Cancelar
+          <ion-icon slot="start" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="flex flex-col items-center justify-center gap-6 px-4 mt-8">
+    <div class="text-center">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Crear QR</h2>
+      <p class="text-sm text-gray-600">
+        Selecciona el tipo de visita que deseas crear
+      </p>
+    </div>
+  </div>
+
+  <div class="px-6 mt-8 mb-6">
+    <div class="flex flex-col gap-4">
+      @for (option of qrOptions; track option.id) {
+      <div
+        class="qr-option-card"
+        [class]="option.gradient"
+        (click)="onOptionSelect(option)"
+        pRipple
+      >
+        <div class="flex items-center justify-between p-4">
+          <div class="flex items-center gap-4">
+            <div
+              class="icon-container"
+              [style.background-color]="'var(--ion-color-' + option.color + ')'"
+            >
+              <fa-icon
+                [icon]="option.icon"
+                class="text-white text-lg"
+              ></fa-icon>
+            </div>
+            <div class="text-content">
+              <h3 class="text-base font-semibold text-gray-800 mb-1">
+                {{ option.title }}
+              </h3>
+              <p class="text-sm text-gray-600">{{ option.subtitle }}</p>
+            </div>
+          </div>
+          <fa-icon [icon]="faChevronRight" class="text-gray-400"></fa-icon>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</ion-content>

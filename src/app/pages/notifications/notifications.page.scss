@@ -1,0 +1,89 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.loading-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  color: var(--ion-color-medium);
+
+  p {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+  }
+}
+
+.load-more {
+  padding: 1rem;
+}
+
+.notification-time {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 0.5rem;
+
+  ion-icon {
+    margin-right: 0.25rem;
+  }
+}
+
+ion-item.unread {
+  --background: var(--ion-color-primary-tint);
+  --background-opacity: 0.1;
+  font-weight: 500;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --inner-padding-end: 0;
+}
+
+ion-searchbar {
+  // margin: 0.5rem 1rem;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Skeleton loading styles
+.skeleton-item {
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --inner-padding-end: 0;
+
+  ion-skeleton-text {
+    --border-radius: 4px;
+  }
+
+  ion-label {
+    ion-skeleton-text {
+      display: block;
+    }
+  }
+}

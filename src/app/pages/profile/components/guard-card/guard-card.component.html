@@ -1,0 +1,105 @@
+<div class="guard-accordion">
+  <div class="accordion-header" (click)="toggleGuardInfo()">
+    <div class="header-content">
+      <ion-icon name="shield-checkmark-outline" class="guard-icon"></ion-icon>
+      <div class="header-text">
+        <h3>Información del Vigilante</h3>
+        <p>Contacto y detalles de seguridad</p>
+      </div>
+    </div>
+    <ion-icon
+      [name]="isGuardInfoOpen() ? 'chevron-up' : 'chevron-down'"
+      class="chevron-icon"
+      [class.rotated]="isGuardInfoOpen()"
+    ></ion-icon>
+  </div>
+
+  <div class="accordion-content" [class.open]="isGuardInfoOpen()">
+    <div class="guard-details">
+      <div class="guard-item">
+        <ion-icon name="person-outline" class="item-icon"></ion-icon>
+        <div class="item-content">
+          <ion-label class="item-label">Nombre del Vigilante</ion-label>
+          <p
+            pRipple
+            class="item-value clickable"
+            (click)="
+              copyToClipboard(
+                guard().first_name + ' ' + guard().last_name,
+                'Nombre del Vigilante'
+              )
+            "
+            title="Clic para copiar"
+          >
+            {{ guard().first_name }} {{ guard().last_name }}
+            <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+          </p>
+        </div>
+      </div>
+
+      <div class="guard-item">
+        <ion-icon name="call-outline" class="item-icon"></ion-icon>
+        <div class="item-content">
+          <ion-label class="item-label">Teléfono</ion-label>
+          <p
+            pRipple
+            class="item-value clickable"
+            (click)="copyToClipboard(guard().phone, 'Teléfono')"
+            title="Clic para copiar"
+          >
+            {{ guard().phone }}
+            <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+          </p>
+        </div>
+      </div>
+
+      <div class="guard-item">
+        <ion-icon name="phone-portrait-outline" class="item-icon"></ion-icon>
+        <div class="item-content">
+          <ion-label class="item-label">Teléfono del Dispositivo</ion-label>
+          <p
+            pRipple
+            class="item-value clickable"
+            (click)="
+              copyToClipboard(guard().device_phone, 'Teléfono del Dispositivo')
+            "
+            title="Clic para copiar"
+          >
+            {{ guard().device_phone }}
+            <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+          </p>
+        </div>
+      </div>
+
+      <div class="guard-item">
+        <ion-icon name="document-outline" class="item-icon"></ion-icon>
+        <div class="item-content">
+          <ion-label class="item-label">Documento </ion-label>
+          <p
+            pRipple
+            class="item-value clickable"
+            (click)="copyToClipboard(guard().document, 'Documento')"
+            title="Clic para copiar"
+          >
+            {{ guard().document | documentFormat }}
+            <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="guard-actions">
+      <ion-button
+        mode="ios"
+        (click)="callGuard()"
+        expand="block"
+        color="success"
+        class="call-guard-button"
+        [disabled]="isCalling()"
+      >
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        Llamar al Guardia
+      </ion-button>
+    </div>
+  </div>
+</div>

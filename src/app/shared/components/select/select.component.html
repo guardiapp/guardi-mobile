@@ -1,0 +1,14 @@
+@if(control) { @if(label()) {
+<ion-label>{{ label() }}</ion-label>
+}
+<p-dropdown
+  class="w-full"
+  [formControl]="control"
+  [options]="options()"
+  optionLabel="name"
+  [placeholder]="placeholder()"
+  styleClass="custom-width"
+  [virtualScroll]="virtualScroll"
+  [virtualScrollItemSize]="virtualScrollItemSize"
+/>
+}

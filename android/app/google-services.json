@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "13432569500",
+    "project_id": "entrafy",
+    "storage_bucket": "entrafy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13432569500:android:ebe606ef55408785eb3759",
+        "android_client_info": {
+          "package_name": "com.entrafy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARgbWpOPlinRrZuBKe7sw4B8oEUy5R9lI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,92 @@
+// Profile Header
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .logo {
+    margin: 0;
+    width: 80px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .profile-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    margin: 0;
+    text-align: center;
+  }
+}
+
+
+
+// Actions Section
+.actions-section {
+  margin: 2rem 0;
+
+  .logout-button {
+    --border-radius: 12px;
+    --padding-start: 1.5rem;
+    --padding-end: 1.5rem;
+    --padding-top: 1rem;
+    --padding-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    ion-icon {
+      font-size: 1.125rem;
+    }
+  }
+}
+
+// Call Vigilant Section
+.call-vigilant-section {
+  margin: 20px 0;
+
+  .call-vigilant-button {
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    font-weight: 600;
+    height: 56px;
+
+    &:hover {
+      --box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+    }
+
+    &:disabled {
+      --box-shadow: none;
+      opacity: 0.6;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .actions-section {
+    margin: 1.5rem 0;
+  }
+}
+
+// Animation for loading states
+ion-spinner {
+  --color: currentColor;
+}
+
+// Focus states for accessibility
+ion-button:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+

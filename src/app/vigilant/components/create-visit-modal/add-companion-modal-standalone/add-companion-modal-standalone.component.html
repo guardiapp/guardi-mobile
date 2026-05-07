@@ -1,0 +1,32 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{ modalTitle }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <!-- Add validation messages if needed -->
+
+    <ion-item>
+      <ion-label position="floating">Cédula</ion-label>
+      <ion-input formControlName="documentId" type="number"></ion-input>
+    </ion-item>
+    <!-- Add validation messages if needed -->
+
+    <!-- Add more form fields here as needed -->
+
+    <ion-button type="submit" expand="block" [disabled]="form.invalid">
+      Guardar Acompañante
+    </ion-button>
+  </form>
+</ion-content>

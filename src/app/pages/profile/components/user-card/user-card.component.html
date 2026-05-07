@@ -1,0 +1,28 @@
+<div class="user-info-card">
+  <div class="user-avatar">
+    <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+  </div>
+
+  <div class="user-details">
+    <div class="detail-item">
+      <ion-label class="detail-label">Nombre</ion-label>
+      <p class="detail-value">{{ auth.user?.name | titlecase }}</p>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <ion-label class="detail-label">Edificio</ion-label>
+        <p class="detail-value">{{ auth.apartment?.building?.name }}</p>
+      </div>
+      <div class="detail-item">
+        <ion-label class="detail-label">Apartamento</ion-label>
+        <p class="detail-value">{{ auth.apartment?.identifier }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <ion-label class="detail-label">Correo electrónico</ion-label>
+      <p class="detail-value">{{ auth.user?.email }}</p>
+    </div>
+  </div>
+</div>

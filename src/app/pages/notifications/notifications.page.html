@@ -1,0 +1,107 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Notificaciones</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Search Bar -->
+  <ion-searchbar
+    [formControl]="searchControl"
+    placeholder="Buscar notificaciones..."
+    show-clear-button="focus"
+    debounce="500"
+  >
+  </ion-searchbar>
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Skeleton Loading for Initial Load -->
+  @if(loading()) {
+  <ion-list class="bg-transparent">
+    <ion-item *ngFor="let item of [1,2,3,4,5]" class="skeleton-item">
+      <ion-skeleton-text
+        animated
+        style="width: 50px; height: 50px; border-radius: 50%"
+        slot="start"
+      ></ion-skeleton-text>
+
+      <ion-label>
+        <ion-skeleton-text
+          animated
+          style="width: 80%; height: 16px; margin-bottom: 8px"
+        ></ion-skeleton-text>
+        <ion-skeleton-text
+          animated
+          style="width: 60%; height: 14px; margin-bottom: 8px"
+        ></ion-skeleton-text>
+        <ion-skeleton-text
+          animated
+          style="width: 40%; height: 12px"
+        ></ion-skeleton-text>
+      </ion-label>
+
+      <ion-skeleton-text
+        animated
+        style="width: 40px; height: 20px"
+        slot="end"
+      ></ion-skeleton-text>
+    </ion-item>
+  </ion-list>
+  } @else {
+  <!-- Notifications List -->
+
+  <ion-list class="bg-transparent">
+    @for(notification of notifications(); track notification.id) {
+    <ion-item (click)="markAsRead(notification)" button>
+      <ion-icon
+        [name]="getNotificationIcon(notification.type)"
+        [color]="getNotificationColor(notification.type)"
+        slot="start"
+        size="large"
+      >
+      </ion-icon>
+
+      <ion-label>
+        <h2>{{ notification.summary }}</h2>
+        <p>{{ notification.content }}</p>
+        <p>{{ notification.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+      </ion-label>
+
+      <ion-badge
+        *ngIf="notification.type === 'PANIC'"
+        color="danger"
+        slot="end"
+      >
+        Urgente
+      </ion-badge>
+    </ion-item>
+    } @empty {
+    <div class="empty-state">
+      <ion-icon name="notifications-off-outline" size="large"></ion-icon>
+      <h3>No hay notificaciones</h3>
+      @if(searchTerm) {
+      <p>No se encontraron notificaciones para "{{ searchTerm }}"</p>
+      } @else {
+      <p>No tienes notificaciones por el momento</p>
+      }
+    </div>
+    }
+  </ion-list>
+  }
+
+  <!-- Load More Button -->
+  <div
+    *ngIf="hasMorePages && !loading && notifications.length > 0"
+    class="load-more"
+  >
+    <ion-button expand="block" fill="outline" (click)="loadMore()">
+      Cargar más notificaciones
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,43 @@
+ion-header {
+  background: transparent;
+
+  ion-toolbar {
+    --background: transparent;
+    height: 100%;
+    ion-back-button {
+      --icon-font-size: 16px;
+    }
+  }
+}
+
+ion-segment {
+  --background: transparent;
+  ion-segment-button {
+    --background: #fff;
+    text-transform: capitalize;
+    border-radius: 7px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    // margin: 10px;
+    outline: none;
+    --color-checked: #0f75bd;
+    --indicator-heigh: none;
+    --indicator-color: transparent;
+    --background-checked: #b3b3b3;
+    --margin-start: 0;
+  }
+}
+
+.available {
+  background-color: blue;
+  color: white;
+}
+
+.reserved {
+  background-color: red;
+  color: white;
+}
+
+.not-available {
+  background-color: gray;
+  color: white;
+}

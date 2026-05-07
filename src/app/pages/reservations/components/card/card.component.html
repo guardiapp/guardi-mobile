@@ -1,0 +1,54 @@
+<ion-item
+  lines="none"
+  class="reservation-card flex items-center w-full rounded-lg shadow bg-white"
+>
+  <ion-avatar class="mr-3">
+    <figure class="mr-4">
+      <ion-icon
+        class="w-[24px] h-[24px] text-primary"
+        name="business-outline"
+      ></ion-icon>
+    </figure>
+  </ion-avatar>
+  <div class="felx flex-col">
+    <h3 class="text-sm font-semibold">
+      {{ reservation.visitor.fullname | titlecase }}
+    </h3>
+
+    <p class="text-sm">Fecha: {{ reservation.visit_date | date }}</p>
+    <p
+      class="text-sm"
+      [ngClass]="{
+        'text-green-500': reservation.qr.state === 'VALID',
+        'text-red-500': reservation.qr.state !== 'VALID'
+      }"
+    >
+      {{ reservation.qr.state === "VALID" ? "Activa" : "Inactiva" }}
+    </p>
+  </div>
+  <ion-buttons class="mr-4" slot="end" class="flex flex-col">
+    <ion-button (click)="shareQr()">
+      <i slot="icon-only" class="w-9">
+        <qrcode
+          (qrCodeURL)="onChangeURL($event)"
+          [qrdata]="qrData"
+          [width]="300"
+          [errorCorrectionLevel]="'M'"
+          elementType="img"
+          colorDark="#00185b"
+        ></qrcode>
+      </i>
+    </ion-button>
+    <ion-button class="text-primary" (click)="showHistory()">
+      <ion-icon slot="icon-only" name="time-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons class="mr-4" slot="end" class="flex flex-col">
+    <ion-button (click)="onEdit(); $event.stopPropagation()">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="deleteReservation()">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-item>

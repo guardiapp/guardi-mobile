@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Header Section -->
+  <div class="profile-header mt-4">
+    <figure class="logo">
+      <img src="assets/logos/logo.png" alt="logo" />
+    </figure>
+    <h2 class="profile-title">Mi Perfil</h2>
+  </div>
+
+  <!-- User Info Card -->
+  <app-user-card [auth]="auth"></app-user-card>
+
+  <!-- Guard Info Accordion -->
+  @if(guard()) {
+  <app-guard-card [guard]="guard()!"> </app-guard-card>
+  }
+
+  <!-- Actions Section -->
+  <div class="actions-section">
+    <ion-button
+      mode="ios"
+      (click)="presentAlert()"
+      expand="block"
+      color="danger"
+      class="logout-button"
+      [disabled]="isSubmitting"
+    >
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Cerrar sesión
+    </ion-button>
+  </div>
+</ion-content>

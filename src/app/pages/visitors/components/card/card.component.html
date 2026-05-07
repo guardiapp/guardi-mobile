@@ -1,0 +1,41 @@
+<ion-item
+  lines="none"
+  class="visitor-card flex items-center w-full rounded-lg shadow bg-white"
+>
+  <ion-avatar class="mr-3">
+    <figure>
+      <ion-icon
+        class="w-10 h-10 text-primary"
+        name="person-circle-outline"
+      ></ion-icon>
+    </figure>
+  </ion-avatar>
+  <div class="felx flex-col">
+    <h3 class="text-base font-semibold">
+      {{ visitor.fullname | titlecase }}
+    </h3>
+    <p class="text-sm">
+      Cédula:
+      <span>
+        {{ visitor.document | documentFormat }}
+      </span>
+    </p>
+    <!-- <p
+      class="text-sm"
+      [ngClass]="{
+        'text-green-500': visitor.active === 1,
+        'text-red-500': visitor.active === 0
+      }"
+    >
+      {{ visitor.active === 1 ? "Activo" : "Inactivo" }}
+    </p> -->
+  </div>
+  <ion-buttons class="mr-4" slot="end" class="flex flex-col">
+    <ion-button (click)="updateVisitor()">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="deleteVisitor()">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-item>

@@ -1,0 +1,11 @@
+:host {
+  width: 100%;
+  max-width: 350px;
+}
+
+.visitor-card {
+  width: 100%;
+  --inner-padding-end: 10px;
+  // --inner-padding-top: 5px;
+  // --inner-padding-bottom: 5px;
+}

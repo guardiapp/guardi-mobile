@@ -1,0 +1,253 @@
+.logo {
+  margin: 0;
+  img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+.form-section {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.custom-select {
+  --background: rgba(255, 255, 255, 0.9);
+  --border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+
+  .label-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+
+  .selected-service-text {
+    font-size: 1rem;
+    color: var(--ion-color-dark);
+    margin: 4px 0 0 0;
+  }
+
+  ion-select {
+    --placeholder-color: var(--ion-color-medium);
+  }
+
+  &:hover {
+    --background: rgba(255, 255, 255, 1);
+  }
+}
+
+.date-section {
+  margin-bottom: 1.5rem;
+
+  p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+
+  ion-datetime-button {
+    --background: rgba(255, 255, 255, 0.9);
+    --border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    width: 100%;
+  }
+}
+
+.checkbox-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  ion-checkbox {
+    --size: 20px;
+    --checkbox-background-checked: var(--ion-color-tertiary);
+    --border-color-checked: var(--ion-color-tertiary);
+  }
+
+  ion-label {
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+}
+
+// Textarea customization
+ion-textarea {
+  --background: rgba(255, 255, 255, 0.9);
+  --color: var(--ion-color-dark);
+  --placeholder-color: var(--ion-color-medium);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+// Radio group customization
+ion-radio-group {
+  ion-item {
+    --background: rgba(255, 255, 255, 0.5);
+    --border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    ion-radio {
+      --color: var(--ion-color-tertiary);
+      --color-checked: var(--ion-color-tertiary);
+    }
+
+    ion-label {
+      h6 {
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        color: var(--ion-color-dark);
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: var(--ion-color-medium);
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Grid responsivo
+.grid {
+  display: grid;
+  gap: 1rem;
+
+  &.grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    &.md\:grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+// Botón principal
+ion-button[type="submit"] {
+  --background: linear-gradient(135deg, var(--ion-color-secondary), var(--ion-color-secondary-shade));
+  --color: white;
+  --box-shadow: 0 4px 12px rgba(var(--ion-color-secondary-rgb), 0.3);
+  &:hover {
+    --box-shadow: 0 6px 16px rgba(var(--ion-color-secondary-rgb), 0.4);
+  }
+
+  &[disabled] {
+    --background: var(--ion-color-medium);
+    --box-shadow: none;
+  }
+}
+
+// Responsive improvements
+@media (min-width: 768px) {
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .px-6 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+// Animation for form sections
+.form-section {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Specific styles for simplified service request interface
+.remarks-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --background: rgba(255, 255, 255, 0.9);
+  --inner-padding-end: 0;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  ion-textarea {
+    --background: transparent;
+  }
+}
+
+.remarks-helper {
+  padding: 0 4px;
+
+  small {
+    font-size: 0.75rem;
+  }
+}
+
+.info-section {
+  .default-info {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    ion-item {
+      --background: transparent;
+      --padding-start: 12px;
+      --padding-end: 12px;
+      --min-height: 50px;
+
+      ion-label {
+        h4 {
+          font-size: 0.9rem;
+          font-weight: 600;
+          margin-bottom: 4px;
+          color: var(--ion-color-dark);
+        }
+
+        p {
+          font-size: 0.85rem;
+          color: var(--ion-color-medium);
+          margin: 0;
+        }
+      }
+
+      ion-icon {
+        font-size: 1.2rem;
+        margin-right: 12px;
+      }
+    }
+  }
+}

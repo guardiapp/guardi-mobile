@@ -1,0 +1,23 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Historial de Escaneos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list class="item-list">
+    @for(scan of scannedHistory; track scan.id) {
+    <ion-item>
+      <ion-label>
+        <h2>{{ scan.type === "ENTRY" ? "Entrada" : "Salida" }}</h2>
+        <p><strong>Fecha:</strong> {{ scan.date | date : "short" }}<br /></p>
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

@@ -1,0 +1,20 @@
+ion-item.skelleton-item {
+  max-width: 350px;
+  --background: transparent;
+
+  --padding-start: 0;
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-searchbar {
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 80px;
+  img {
+    width: 100%;
+  }
+}

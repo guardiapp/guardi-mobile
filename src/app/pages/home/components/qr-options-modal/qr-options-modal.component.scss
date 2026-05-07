@@ -1,0 +1,64 @@
+.logo {
+  margin: 0;
+  img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+.qr-option-card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .icon-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .text-content {
+    flex: 1;
+  }
+}
+
+// Gradientes para las opciones
+.visitor-gradient {
+  background: linear-gradient(135deg,
+    rgba(56, 128, 255, 0.1) 0%,
+    rgba(56, 128, 255, 0.05) 100%);
+  border-left: 4px solid var(--ion-color-primary);
+}
+
+.service-gradient {
+  background: linear-gradient(135deg,
+    rgba(255, 193, 7, 0.1) 0%,
+    rgba(255, 193, 7, 0.05) 100%);
+  border-left: 4px solid var(--ion-color-tertiary);
+}
+
+// Responsive
+@media (min-width: 768px) {
+  .qr-option-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
